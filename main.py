@@ -15,8 +15,7 @@ Hi there!
 {oddelovac}
 I've generated a random 4 digit number for you.
 Let's play a bulls and cows game.
-{oddelovac}
-Enter a number: """
+{oddelovac}"""
 )
 
 # vygenerování náhodného 4místného čísla, nesmí začínat 0 a nesmí obsahovat duplicity
@@ -88,7 +87,7 @@ pocet_tipu = 1
 while True:
 
     # nastavení vstupu uživatele
-    tip_uzivatele = input()
+    tip_uzivatele = input("Enter a number: ")
 
     # podmínka, když číslo bude uhodnuto; smyčka se ukončí
     if tip_uzivatele == vygenerovane_cislo:
@@ -116,7 +115,8 @@ That's amazing!"""
         # pokud je vstup zadán správně, dochází přes funkci "vyhodnot_tip" k vyhodnocení počtu bulls a cows
         # a přes funkci "formatuj_vysledek" je vypsán formátovaný výstup
         else:
+            bulls, cows = vyhodnot_tip(tip_uzivatele)
             print(f"""
-{formatuj_vysledek(vyhodnot_tip)}
+{formatuj_vysledek(bulls, cows)}
 {oddelovac}"""
 )
