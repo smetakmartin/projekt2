@@ -26,7 +26,7 @@ while True:
         break
 
 # definice funkce - kontrola řádného vstupu uživatele
-def kontrola_vstupu(hodnota):
+def zvaliduj_vstup(hodnota):
 
     # musí obsahovat pouze číslice
     if not hodnota.isdigit():
@@ -47,7 +47,7 @@ def kontrola_vstupu(hodnota):
     return zneni_chyby
 
 # definice funkce - vyhodnocení vstupu uživatele
-def hadani(tip):
+def vyhodnot_tip(tip):
     
     # množina číslic ve vygenerovaném čísle - pro následný propočet cows
     znaky_hadane_cislo = set(vygenerovane_cislo)
@@ -62,6 +62,10 @@ def hadani(tip):
         elif x in znaky_hadane_cislo:
             cows += 1
     
+    return bulls, cows
+    
+def formatuj_vysledek(bulls, cows):
+ 
     # vyhodnocení počtu bulls a cows
     if bulls == 1:
         text_bulls = (f"""{bulls} bull""")
@@ -100,8 +104,8 @@ That's amazing!"""
     else:
         pocet_tipu += 1
 
-        # přes funkci "kontrola_vstupu" probíhá kontrola, zda byly u vstupu dodrženy všechny požadavky, případně se vypíše charakter chyby
-        chyba = kontrola_vstupu(tip_uzivatele)
+        # přes funkci "zvaliduj_vstup" probíhá kontrola, zda byly u vstupu dodrženy všechny požadavky, případně se vypíše charakter chyby
+        chyba = zvaliduj_vstup(tip_uzivatele)
 
         if chyba:
             print(f"""
@@ -109,9 +113,10 @@ That's amazing!"""
 {oddelovac}"""
 )
                   
-        # pokud je vstup zadán správně, dochází přes funkci "hadani" k vyhodnocení počtu bulls a cows
+        # pokud je vstup zadán správně, dochází přes funkci "vyhodnot_tip" k vyhodnocení počtu bulls a cows
+        # a přes funkci "formatuj_vysledek" je vypsán formátovaný výstup
         else:
             print(f"""
-{hadani(tip_uzivatele)}
+{formatuj_vysledek(vyhodnot_tip)}
 {oddelovac}"""
 )
