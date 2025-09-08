@@ -7,23 +7,6 @@ email: smetakmartin@seznam.cz
 
 import random
 
-# úvodní text hry
-oddelovac = "_" * 47
-
-print(f"""
-Hi there!
-{oddelovac}
-I've generated a random 4 digit number for you.
-Let's play a bulls and cows game.
-{oddelovac}"""
-)
-
-# vygenerování náhodného 4místného čísla, nesmí začínat 0 a nesmí obsahovat duplicity
-while True:
-    vygenerovane_cislo = str(random.randint(1000,9999))
-    if len(set(vygenerovane_cislo)) == 4:
-        break
-
 # definice funkce - kontrola řádného vstupu uživatele
 def zvaliduj_vstup(hodnota):
 
@@ -45,8 +28,9 @@ def zvaliduj_vstup(hodnota):
 
     return zneni_chyby
 
-# definice funkce - vyhodnocení vstupu uživatele
-def vyhodnot_tip(tip):
+
+# definice funkce - vyhodnocení tipu uživatele
+def vyhodnot_tip(tip, vygenerovane_cislo):
     
     # množina číslic ve vygenerovaném čísle - pro následný propočet cows
     znaky_hadane_cislo = set(vygenerovane_cislo)
@@ -63,6 +47,8 @@ def vyhodnot_tip(tip):
     
     return bulls, cows
     
+
+# definice funkce - naformátování výstupu
 def formatuj_vysledek(bulls, cows):
  
     # vyhodnocení počtu bulls a cows
@@ -80,43 +66,67 @@ def formatuj_vysledek(bulls, cows):
     
     return finalni_text
 
-# nastavení výchozího počtu tipů
-pocet_tipu = 1
 
-# nastavení smyčky, dokud uživatel neuhodne správné číslo
-while True:
+# hlavní funkce programu
+def spust_funkci():
 
-    # nastavení vstupu uživatele
-    tip_uzivatele = input("Enter a number: ")
+    # úvodní text hry
+    oddelovac = "_" * 47
 
-    # podmínka, když číslo bude uhodnuto; smyčka se ukončí
-    if tip_uzivatele == vygenerovane_cislo:
-        print(f"""
+    print(f"""
+Hi there!
+{oddelovac}
+I've generated a random 4 digit number for you.
+Let's play a bulls and cows game.
+{oddelovac}"""
+)
+
+    # vygenerování náhodného 4místného čísla, nesmí začínat 0 a nesmí obsahovat duplicity
+    while True:
+        vygenerovane_cislo = str(random.randint(1000,9999))
+        if len(set(vygenerovane_cislo)) == 4:
+            break
+    # nastavení výchozího počtu tipů
+    pocet_tipu = 1
+
+    # nastavení smyčky, dokud uživatel neuhodne správné číslo
+    while True:
+
+        # nastavení vstupu uživatele
+        tip_uzivatele = input("Enter a number: ")
+
+        # podmínka, když číslo bude uhodnuto; smyčka se ukončí
+        if tip_uzivatele == vygenerovane_cislo:
+            print(f"""
 Correct, you've guessed the right number
 in {pocet_tipu} guesses!
 {oddelovac} 
 That's amazing!"""
 )
-        break
+            break
     
-    # pokud není číslo uhodnuto, roste počet tipů; smyčka pokračuje
-    else:
-        pocet_tipu += 1
+        # pokud není číslo uhodnuto, roste počet tipů; smyčka pokračuje
+        else:
+            pocet_tipu += 1
 
-        # přes funkci "zvaliduj_vstup" probíhá kontrola, zda byly u vstupu dodrženy všechny požadavky, případně se vypíše charakter chyby
-        chyba = zvaliduj_vstup(tip_uzivatele)
+            # přes funkci "zvaliduj_vstup" probíhá kontrola, zda byly u vstupu dodrženy všechny požadavky, případně se vypíše charakter chyby
+            chyba = zvaliduj_vstup(tip_uzivatele)
 
-        if chyba:
-            print(f"""
+            if chyba:
+                print(f"""
 {chyba}
 {oddelovac}"""
 )
                   
-        # pokud je vstup zadán správně, dochází přes funkci "vyhodnot_tip" k vyhodnocení počtu bulls a cows
-        # a přes funkci "formatuj_vysledek" je vypsán formátovaný výstup
-        else:
-            bulls, cows = vyhodnot_tip(tip_uzivatele)
-            print(f"""
+            # pokud je vstup zadán správně, dochází přes funkci "vyhodnot_tip" k vyhodnocení počtu bulls a cows
+            # a přes funkci "formatuj_vysledek" je vypsán formátovaný výstup
+            else:
+                bulls, cows = vyhodnot_tip(tip_uzivatele, vygenerovane_cislo)
+                print(f"""
 {formatuj_vysledek(bulls, cows)}
 {oddelovac}"""
 )
+
+# spuštění hlavní funkce
+if __name__ == "__main__":
+    spust_funkci()
