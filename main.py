@@ -24,8 +24,6 @@ while True:
     vygenerovane_cislo = str(random.randint(1000,9999))
     if len(set(vygenerovane_cislo)) == 4:
         break
-    else:
-        continue
 
 # definice funkce - kontrola řádného vstupu uživatele
 def kontrola_vstupu(hodnota):
@@ -63,8 +61,6 @@ def hadani(tip):
             bulls += 1
         elif x in znaky_hadane_cislo:
             cows += 1
-        else:
-            continue
     
     # vyhodnocení počtu bulls a cows
     if bulls == 1:
@@ -105,9 +101,11 @@ That's amazing!"""
         pocet_tipu += 1
 
         # přes funkci "kontrola_vstupu" probíhá kontrola, zda byly u vstupu dodrženy všechny požadavky, případně se vypíše charakter chyby
-        if kontrola_vstupu(tip_uzivatele):
+        chyba = kontrola_vstupu(tip_uzivatele)
+
+        if chyba:
             print(f"""
-{kontrola_vstupu(tip_uzivatele)}
+{chyba}
 {oddelovac}"""
 )
                   
