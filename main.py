@@ -30,11 +30,6 @@ while True:
 # definice funkce - kontrola řádného vstupu uživatele
 def kontrola_vstupu(hodnota):
 
-    # počet unikátních znaků - pro následnou kontrolu duplicit níže
-    unikatni_znak = set()
-    for kod in hodnota:
-        unikatni_znak.add(kod)
-
     # musí obsahovat pouze číslice
     if not hodnota.isdigit():
         zneni_chyby = "Hodnota obsahuje nečíselné znaky."
@@ -44,8 +39,8 @@ def kontrola_vstupu(hodnota):
     # nesmí začínat 0
     elif hodnota.startswith("0"):
         zneni_chyby = "Hodnota nesmí začínat 0."
-    # nesmí obsahovat duplicity
-    elif len(unikatni_znak) < 4:
+    # nesmí obsahovat duplicity (kontrola počtu unikátních znaků)
+    elif len(set(hodnota)) < 4:
         zneni_chyby = "Hodnota nesmí obsahovat duplicity."
     # jinak je hodnota ok
     else:
